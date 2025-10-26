@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <h1 style="text-align:center; margin-bottom:10px;">Inicio de Sesión</h1>
+    <p style="text-align:center;">Por favor, ingrese su usuario y contraseña para iniciar sesión:</p>
+
+    <style>
+
+        form {
+            background-color: #000000;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            color: white;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        form input {
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #000249;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button, .btn-register {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .btn-register {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        .btn-register:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="id_username">Usuario:</label>
+        <input type="text" name="username" id="id_username" placeholder="Ingrese su usuario" required>
+
+        <label for="id_password">Contraseña:</label>
+        <input type="password" name="password" id="id_password" placeholder="Ingrese su contraseña" required>
+
+        {% if next %}
+            <input type="hidden" name="next" value="{{ next }}">
+        {% endif %}
+
+        <button type="submit">Iniciar Sesión</button>
+
+        <p style="text-align:center; margin-top:10px;">Crear un nuevo usuario:</p>
+        <a href="{% url 'administradores:registroapp' %}" class="btn-register">Registrarse</a>
+    </form>
+</body>
+</html>
+{% endblock %}
+
